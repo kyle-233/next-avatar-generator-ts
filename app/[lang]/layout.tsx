@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 import '../globals.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { dir } from 'i18next'
 import { languages } from '@/i18n/settings'
-import { Header } from './header'
+import { cn } from '@/lib/utils'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Nunito({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -28,14 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={lang} dir={dir(lang)} suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={cn('text-[#a4b2c1]', font.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
           {children}
         </ThemeProvider>
       </body>

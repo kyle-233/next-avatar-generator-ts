@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+:root {
+  @apply h-full;
+  @apply box-border;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -66,4 +73,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+li > svg {
+  @apply w-full;
+  @apply h-full;
 }
