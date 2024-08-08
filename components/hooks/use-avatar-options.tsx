@@ -12,7 +12,6 @@ export const useAvatarOption = () => {
   const avatarOption = history.present
 
   const setAvatarOption = (newOption: AvatarOption) => {
-    console.log('newOption', newOption)
     setState(SET_AVATAR_OPTION, newOption)
   }
 

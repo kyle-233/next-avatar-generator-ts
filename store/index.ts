@@ -1,6 +1,6 @@
 import { getRandomAvatarOption } from '@/lib'
 import { SCREEN } from '@/lib/constant'
-import { WrapperShape } from '@/lib/enums'
+import { ActionType, WrapperShape } from '@/lib/enums'
 import type { AvatarOption } from '@/types'
 import { create } from 'zustand'
 
@@ -16,7 +16,7 @@ interface StoreProps {
     future: AvatarOption[]
   }
   // isSiderCollapsed: boolean
-  setState: (type: any, values: AvatarOption) => void
+  setState: (type: any, values?: AvatarOption) => void
 }
 
 export const useStore = create<StoreProps>((set) => ({
@@ -31,11 +31,11 @@ export const useStore = create<StoreProps>((set) => ({
       set((state) => ({
         history: {
           past: [...state.history.past, state.history.present],
-          present: values,
+          present: values!,
           future: [],
         },
       }))
-    } else if (type === 'UNDO') {
+    } else if (type === ActionType.Undo) {
       set((state) => {
         if (state.history.past.length > 0) {
           const previous = state.history.past[state.history.past.length - 1]
