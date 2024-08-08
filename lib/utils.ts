@@ -15,7 +15,11 @@ export const fetchSvg = async (
       import(`@/assets/preview/${widgetType}/${widget}.svg`)
     const importData = (await importFn()).default
     if (isNeedFetch) {
-      const response = await fetch(`http://localhost:3001/${importData.src}`)
+      const origin =
+        typeof window !== 'undefined' && window.location.origin
+          ? window.location.origin
+          : ''
+      const response = await fetch(`${origin}/${importData.src}`)
       return await response.text()
     } else {
       return importData

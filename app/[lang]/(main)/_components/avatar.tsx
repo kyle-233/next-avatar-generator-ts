@@ -1,4 +1,5 @@
 'use client'
+import { useOrigin } from '@/components/hooks/use-origin'
 import { AVATAR_LAYER, NONE } from '@/lib/constant'
 import { widgetData } from '@/lib/dynamic-data'
 import { WidgetType } from '@/lib/enums'
@@ -13,6 +14,7 @@ export const Avatar = ({
   avatarSize: number
 }) => {
   const [content, setContent] = useState('')
+  const origin = useOrigin()
   useEffect(() => {
     const getContent = async () => {
       const sortedList = Object.entries(avatarOption.widgets).sort(
@@ -46,7 +48,7 @@ export const Avatar = ({
 
             if (svgRawObject.src) {
               const svgRawResponse = await fetch(
-                `http://localhost:3001${svgRawObject.src}`,
+                `${origin}/${svgRawObject.src}`,
               )
               const svgRaw = await svgRawResponse.text()
 
