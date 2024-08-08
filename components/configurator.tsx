@@ -50,7 +50,7 @@ export const Configurator = () => {
     const promises: Promise<string>[] = list.map(async (widget: string) => {
       if (widget !== 'none' && previewData?.[widgetType]?.[widget]) {
         const response: any = await fetchSvg(widgetType, widget)
-        return await response.text()
+        return response
       }
       return 'X'
     })
@@ -213,28 +213,6 @@ export const Configurator = () => {
                     onClick={(color) => setWidgetColor(s.widgetType, color)}
                     activeColor={getWidgetColor(s.widgetType)!}
                   />
-                  {/* <ul className="flex items-center flex-wrap">
-                    {SETTINGS[
-                      s.widgetType === WidgetType.Face
-                        ? 'skinColors'
-                        : 'commonColors'
-                    ].map((fillColor) => (
-                      <li
-                        key={fillColor}
-                        className="relative z-[1] w-[calc(100%/7)] py-3 px-0 cursor-pointer transition-all duration-200"
-                        onClick={() => setWidgetColor(s.widgetType, fillColor)}
-                      >
-                        <div
-                          className={cn(
-                            'relative box-content inline-block w-[1.3rem] h-[1.3rem] my-0 mx-auto text-[16px] z-[100] rounded-full shadow-[0_0_0.05em_0.2em_#1f2329] transition-all duration-200 before:absolute before:top-1/2 before:left-1/2 before:-z-[999] before:w-full before:h-full before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 before:opacity-50 before:transition-all before:duration-150 before:bg-inherit after:absolute after:top-1/2 after:left-1/2 after:z-[3] after:text-[#1f2329] after:w-full after:h-full after:text-[1.5rem] after:-translate-x-1/2 after:-translate-y-1/2 after:opacity-0 after:scale-50 after:transition-all after:duration-150 after:content-["√"] after:font-bold after:text-center before:content-[""]',
-                            fillColor === getWidgetColor(s.widgetType) &&
-                              'before:w-[160%] before:h-[160%] after:opacity-100',
-                          )}
-                          style={{ background: fillColor }}
-                        />
-                      </li>
-                    ))}
-                  </ul> */}
                 </details>
               )}
               <ul className="list-none grid grid-cols-4 gap-2">
@@ -249,8 +227,20 @@ export const Configurator = () => {
                           'bg-[#2c323a]',
                       )}
                       onClick={() => switchWidget(s.widgetType, it.widgetShape)}
-                      dangerouslySetInnerHTML={{ __html: it.svgRaw }}
-                    />
+                      // dangerouslySetInnerHTML={{ __html: it.svgRaw }}
+                    >
+                      <div className="relative w-full h-full grid place-content-center">
+                        {it.svgRaw === 'X' ? (
+                          'X'
+                        ) : (
+                          <Image
+                            fill
+                            src={it.svgRaw}
+                            alt={`${it.widgetType} ${it.widgetShape}`}
+                          />
+                        )}
+                      </div>
+                    </li>
                   )
                 })}
               </ul>
