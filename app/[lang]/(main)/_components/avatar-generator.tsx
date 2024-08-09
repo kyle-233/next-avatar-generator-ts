@@ -6,10 +6,12 @@ import { AvatarBorder } from './avatar-border'
 import { Avatar } from './avatar'
 import { useAvatarOption } from '@/components/hooks/use-avatar-options'
 import { useMounted } from '@/components/hooks/use-mounted'
+import { useCollapse } from '@/components/hooks/use-collapse'
 
 export const AvatarGenerator = () => {
   const { avatarOption } = useAvatarOption()
   const isMounted = useMounted()
+  const { flipped } = useCollapse()
   const avatarSize = 280
 
   if (!isMounted) {
@@ -24,6 +26,7 @@ export const AvatarGenerator = () => {
           avatarOption.wrapperShape === 'circle' && 'rounded-full',
           avatarOption.wrapperShape === 'square' && 'rounded-none',
           avatarOption.wrapperShape === 'squircle' && 'rounded-3xl',
+          flipped && 'rotate-y-180', // add tailwindcss-3d package to support it
         )}
       >
         <AvatarBackground />

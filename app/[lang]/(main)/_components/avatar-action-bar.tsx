@@ -7,9 +7,11 @@ import IconFlip from '@/assets/icons/icon-flip.svg'
 import IconCode from '@/assets/icons/icon-code.svg'
 import { ActionType } from '@/lib/enums'
 import { useStore } from '@/store'
+import { useCollapse } from '@/components/hooks/use-collapse'
 
 export const AvatarActionBar = () => {
   const { history, setState } = useStore()
+  const { flipped, onFlipped } = useCollapse()
   const canUndo = history.past.length > 0
   const canRedo = history.future.length > 0
   const menus = [
@@ -38,38 +40,11 @@ export const AvatarActionBar = () => {
   ]
 
   function handleAction(actionType: ActionType) {
-    console.log(actionType)
-    setState(actionType)
-    // switch (actionType) {
-    //   case ActionType.Undo:
-    //     store[UNDO]()
-    //     recordEvent('action_undo', {
-    //       event_category: 'action',
-    //       event_label: 'Undo',
-    //     })
-    //     break
-    //   case ActionType.Redo:
-    //     store[REDO]()
-    //     recordEvent('action_redo', {
-    //       event_category: 'action',
-    //       event_label: 'Redo',
-    //     })
-    //     break
-    //   case ActionType.Flip:
-    //     flipped.value = !flipped.value
-    //     recordEvent('action_flip_avatar', {
-    //       event_category: 'action',
-    //       event_label: 'Flip Avatar',
-    //     })
-    //     break
-    //   case ActionType.Code:
-    //     codeVisible.value = !codeVisible.value
-    //     recordEvent('action_view_code', {
-    //       event_category: 'action',
-    //       event_label: 'View Avatar Option Code',
-    //     })
-    //     break
-    // }
+    if (actionType === ActionType.Undo || actionType === ActionType.Redo) {
+      setState(actionType)
+    } else if (actionType === ActionType.Flip) {
+      onFlipped()
+    }
   }
   return (
     <div className="flex items-center p-2 bg-[#2a2f37] rounded-[2rem] gap-x-4">

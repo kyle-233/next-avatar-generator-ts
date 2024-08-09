@@ -15,7 +15,6 @@ interface StoreProps {
     present: AvatarOption
     future: AvatarOption[]
   }
-  // isSiderCollapsed: boolean
   setState: (type: any, values?: AvatarOption) => void
 }
 
@@ -25,7 +24,6 @@ export const useStore = create<StoreProps>((set) => ({
     present: getRandomAvatarOption({ wrapperShape: WrapperShape.Squircle }),
     future: [],
   },
-  // isSiderCollapsed: window.innerWidth <= SCREEN.lg,
   setState: (type, values) => {
     if (type === 'SET_AVATAR_OPTION') {
       set((state) => ({
@@ -48,6 +46,21 @@ export const useStore = create<StoreProps>((set) => ({
               past: newPast,
               present: previous,
               future: [state.history.present, ...state.history.future],
+            },
+          }
+        }
+        return state
+      })
+    } else if (type === ActionType.Redo) {
+      set((state) => {
+        if (state.history.future.length > 0) {
+          const next = state.history.future[0]
+          const newFuture = state.history.future.slice(1)
+          return {
+            history: {
+              past: [...state.history.past, state.history.present],
+              present: next,
+              future: newFuture,
             },
           }
         }
