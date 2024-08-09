@@ -8,6 +8,7 @@ import {
 import type { AvatarOption, None } from '@/types/index'
 
 import { AVATAR_LAYER, NONE, SETTINGS, SPECIAL_AVATARS } from './constant'
+import { cn } from './utils'
 
 /**
  * Get a random value from an array.
@@ -219,7 +220,7 @@ export function highlightJSON(json: string): string {
       } else {
         cls = 'number'
       }
-      return `<span class="token ${cls}">${match}</span>`
+      return `<span class=${cn('', cls === 'key' && 'text-[#ffcb6b]', cls === 'string' && 'text-[#c3e88d]')}>${match}</span>`
     },
   )
 }

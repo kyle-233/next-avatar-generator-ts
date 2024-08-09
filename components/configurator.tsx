@@ -156,7 +156,7 @@ export const Configurator = () => {
                       ' inline-block w-6 h-6 bg-[#a4b2c1] transition-all duration-200',
                       shape === 'circle' && 'rounded-full',
                       shape === 'square' && 'rounded-none',
-                      shape === 'squircle' && 'rounded-3xl',
+                      shape === 'squircle' && 'rounded-md',
                       shape === avatarOption!.wrapperShape && 'bg-[#6967fe]',
                     )}
                   />

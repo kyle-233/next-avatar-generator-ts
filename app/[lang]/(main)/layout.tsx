@@ -5,6 +5,7 @@ import { Footer } from './footer'
 import { useCollapse } from '@/components/hooks/use-collapse'
 import { cn } from '@/lib/utils'
 import { BackgroundGradient } from '@/components/background-gradient'
+import { ConfettiCanvas } from '@/components/confetti-canvas'
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isCollapsed, setIsCollapsed } = useCollapse()
@@ -23,6 +24,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
             <Footer />
           </div>
           <BackgroundGradient />
+          <ConfettiCanvas />
         </div>
       </section>
       <Aside />

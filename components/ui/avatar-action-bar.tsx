@@ -8,10 +8,12 @@ import IconCode from '@/assets/icons/icon-code.svg'
 import { ActionType } from '@/lib/enums'
 import { useStore } from '@/store'
 import { useCollapse } from '@/components/hooks/use-collapse'
+import { useModal } from '@/store/modal-store'
 
 export const AvatarActionBar = () => {
   const { history, setState } = useStore()
   const { flipped, onFlipped } = useCollapse()
+  const { onOpen } = useModal()
   const canUndo = history.past.length > 0
   const canRedo = history.future.length > 0
   const menus = [
@@ -44,6 +46,8 @@ export const AvatarActionBar = () => {
       setState(actionType)
     } else if (actionType === ActionType.Flip) {
       onFlipped()
+    } else if (actionType === ActionType.Code) {
+      onOpen('code')
     }
   }
   return (
