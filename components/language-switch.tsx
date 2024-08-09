@@ -55,7 +55,7 @@ export function LanguageSwitcher() {
                 height={15}
                 className="mr-4"
               />
-              <span className="">{language.lang}</span>
+              <span className="">{language.name}</span>
             </Link>
           </DropdownMenuItem>
         ))}

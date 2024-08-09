@@ -6,7 +6,7 @@ export const languagesConfig: Record<
   { lang: string; name: string; imageSrc: string }
 > = {
   cn: { lang: 'cn', name: '简体中文', imageSrc: '/_next/CHN.svg' },
-  en: { lang: 'en', name: '简体中文', imageSrc: '/_next/USA.svg' },
+  en: { lang: 'en', name: 'English', imageSrc: '/_next/USA.svg' },
   // de: { lang: 'de', imageSrc: '/_next/DEU.svg' },
 }
 export const languages = Object.keys(languagesConfig)
