@@ -11,6 +11,7 @@ import { useCollapse } from '@/components/hooks/use-collapse'
 import { useModal } from '@/store/modal-store'
 import { useParams } from 'next/navigation'
 import { useTranslation } from '@/i18n/client'
+import { Icons } from './icons'
 
 export const AvatarActionBar = () => {
   const { history, setState } = useStore()
@@ -20,27 +21,28 @@ export const AvatarActionBar = () => {
   const { onOpen } = useModal()
   const canUndo = history.past.length > 0
   const canRedo = history.future.length > 0
+  console.log('', Icons.back)
   const menus = [
     {
       type: ActionType.Undo,
-      icon: IconBack,
+      icon: <Icons.back className="w-6 h-6 text-black dark:text-white" />,
       tip: t('revocation'),
       disabled: !canUndo,
     },
     {
       type: ActionType.Redo,
-      icon: IconNext,
+      icon: <Icons.next className="w-6 h-6 text-black dark:text-white" />,
       tip: t('reduction'),
       disabled: !canRedo,
     },
     {
       type: ActionType.Flip,
-      icon: IconFlip,
+      icon: <Icons.flip className="w-6 h-6 text-black dark:text-white" />,
       tip: t('flip'),
     },
     {
       type: ActionType.Code,
-      icon: IconCode,
+      icon: <Icons.code className="w-6 h-6 text-black dark:text-white" />,
       tip: t('code'),
     },
   ]
@@ -55,7 +57,7 @@ export const AvatarActionBar = () => {
     }
   }
   return (
-    <div className="flex items-center p-2 bg-[#2a2f37] rounded-[2rem] gap-x-4">
+    <div className="flex items-center p-2 bg-content rounded-[2rem] gap-x-4">
       {menus.map((menu) => (
         <Button
           key={menu.type}
@@ -68,13 +70,7 @@ export const AvatarActionBar = () => {
             handleAction(menu.type)
           }}
         >
-          <Image
-            src={menu.icon}
-            alt={menu.tip}
-            width={24}
-            height={24}
-            className="w-6 h-6"
-          />
+          {menu.icon}
         </Button>
       ))}
     </div>

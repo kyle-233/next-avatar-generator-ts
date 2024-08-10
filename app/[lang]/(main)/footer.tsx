@@ -6,7 +6,10 @@ export const Footer = () => {
   return (
     <footer className="flex justify-center items-center gap-4 py-4  ">
       <LanguageSwitcher />
-      <Separator orientation="vertical" className="h-4 w-[2px] rounded-sm" />
+      <Separator
+        orientation="vertical"
+        className="h-4 w-[2px] bg-common rounded-sm"
+      />
       <ModeToggle />
     </footer>
   )

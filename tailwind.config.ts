@@ -20,6 +20,11 @@ const config = {
     },
     extend: {
       colors: {
+        common: 'hsl(var(--dark-text))',
+        content: {
+          DEFAULT: 'hsl(var(--dark-content))',
+          foreground: 'hsl(var(--dark-content-foreground))',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

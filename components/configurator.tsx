@@ -228,10 +228,10 @@ export const Configurator = () => {
                     <li
                       key={it.widgetShape}
                       className={cn(
-                        'flex items-center justify-center w-full h-20 p-4 rounded-md cursor-pointer transition-all duration-200 hover:bg-[#1f2329]',
+                        'flex items-center justify-center w-full h-20 p-4 rounded-md cursor-pointer transition-all duration-200 hover:bg-content-foreground',
                         it.widgetShape ===
                           avatarOption.widgets?.[s.widgetType]?.shape &&
-                          'bg-[#2c323a]',
+                          'bg-content',
                       )}
                       onClick={() => switchWidget(s.widgetType, it.widgetShape)}
                       // dangerouslySetInnerHTML={{ __html: it.svgRaw }}

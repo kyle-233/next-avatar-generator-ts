@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={lang} dir={dir(lang)} suppressHydrationWarning>
-      <body className={cn('text-[#a4b2c1]', font.className)}>
+      <body className={cn('text-common', font.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
