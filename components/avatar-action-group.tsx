@@ -79,16 +79,17 @@ export const AvatarActionGroup = () => {
         )
 
         res.set(hashKey, randomAvatarOption)
-
         return res
       },
       new Map(),
     )
 
     const avatarList = Array.from(avatarMap.values())
-    console.log('111')
 
-    onOpen('batch-generate', { avatarList: avatarList })
+    onOpen('batch-generate', {
+      avatarList: avatarList,
+      generateMultiple: () => generateMultiple(30),
+    })
   }
   return (
     <div className="flex items-center justify-center mt-16 gap-x-4">

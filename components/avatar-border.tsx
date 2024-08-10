@@ -2,9 +2,13 @@
 import { useAvatarOption } from '@/components/hooks/use-avatar-options'
 import { useMounted } from '@/components/hooks/use-mounted'
 import { cn } from '@/lib/utils'
+import { AvatarOption } from '@/types'
 
-export const AvatarBorder = () => {
-  const { avatarOption } = useAvatarOption()
+interface AvatarBorderProps {
+  avatarOption: AvatarOption
+}
+
+export const AvatarBorder = ({ avatarOption }: AvatarBorderProps) => {
   const isMounted = useMounted()
 
   const color = avatarOption.background.borderColor

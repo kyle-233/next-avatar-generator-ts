@@ -6,6 +6,7 @@ export type ModalType = 'code' | 'download' | 'batch-generate'
 interface ModalData {
   url?: string
   avatarList?: AvatarOption[]
+  generateMultiple?: (count?: number) => Promise<void>
 }
 
 interface ModalStore {

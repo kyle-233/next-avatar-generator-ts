@@ -2,9 +2,13 @@
 import { useAvatarOption } from '@/components/hooks/use-avatar-options'
 import { useMounted } from '@/components/hooks/use-mounted'
 import { cn } from '@/lib/utils'
+import { AvatarOption } from '@/types'
 
-export const AvatarBackground = () => {
-  const { avatarOption } = useAvatarOption()
+interface AvatarBackgroundProps {
+  avatarOption: AvatarOption
+}
+
+export const AvatarBackground = ({ avatarOption }: AvatarBackgroundProps) => {
   const isMounted = useMounted()
   const color = avatarOption.background.color
 

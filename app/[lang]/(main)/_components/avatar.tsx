@@ -46,9 +46,9 @@ export const Avatar = ({
               widgetFillColor = skinColor
             }
 
-            if (svgRawObject.src) {
+            if ((svgRawObject as any).src) {
               const svgRawResponse = await fetch(
-                `${origin}/${svgRawObject.src}`,
+                `${origin}/${(svgRawObject as any).src}`,
               )
               const svgRaw = await svgRawResponse.text()
 
