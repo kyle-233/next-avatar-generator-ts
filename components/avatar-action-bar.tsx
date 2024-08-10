@@ -9,10 +9,14 @@ import { ActionType } from '@/lib/enums'
 import { useStore } from '@/store'
 import { useCollapse } from '@/components/hooks/use-collapse'
 import { useModal } from '@/store/modal-store'
+import { useParams } from 'next/navigation'
+import { useTranslation } from '@/i18n/client'
 
 export const AvatarActionBar = () => {
   const { history, setState } = useStore()
   const { flipped, onFlipped } = useCollapse()
+  const params = useParams()
+  const { t } = useTranslation(params.lang as string)
   const { onOpen } = useModal()
   const canUndo = history.past.length > 0
   const canRedo = history.future.length > 0
@@ -20,24 +24,24 @@ export const AvatarActionBar = () => {
     {
       type: ActionType.Undo,
       icon: IconBack,
-      tip: 'revocation',
+      tip: t('revocation'),
       disabled: !canUndo,
     },
     {
       type: ActionType.Redo,
       icon: IconNext,
-      tip: 'reduction',
+      tip: t('reduction'),
       disabled: !canRedo,
     },
     {
       type: ActionType.Flip,
       icon: IconFlip,
-      tip: 'flip',
+      tip: t('flip'),
     },
     {
       type: ActionType.Code,
       icon: IconCode,
-      tip: 'code',
+      tip: t('code'),
     },
   ]
 
@@ -59,6 +63,7 @@ export const AvatarActionBar = () => {
           size="icon"
           disabled={menu.disabled}
           className="rounded-full"
+          title={menu.tip}
           onClick={() => {
             handleAction(menu.type)
           }}

@@ -1,11 +1,11 @@
-export const fallbackLng = 'cn'
+export const fallbackLng = 'zh-CN'
 export const cookieName = 'acccept-language'
 export const defaultNS = 'translation'
 export const languagesConfig: Record<
   string,
   { lang: string; name: string; imageSrc: string }
 > = {
-  cn: { lang: 'cn', name: '简体中文', imageSrc: '/_next/CHN.svg' },
+  'zh-CN': { lang: 'zh-CN', name: '简体中文', imageSrc: '/_next/CHN.svg' },
   en: { lang: 'en', name: 'English', imageSrc: '/_next/USA.svg' },
   // de: { lang: 'de', imageSrc: '/_next/DEU.svg' },
 }

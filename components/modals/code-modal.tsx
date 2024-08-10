@@ -11,11 +11,16 @@ import { ScrollArea } from '../ui/scroll-area'
 import { useAvatarOption } from '../hooks/use-avatar-options'
 import { highlightJSON } from '@/lib'
 import { Button } from '../ui/button'
+import { useParams } from 'next/navigation'
+import { useTranslation } from '@/i18n/client'
 
 export const CodeModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const { avatarOption } = useAvatarOption()
   const isModalOpen = isOpen && type === 'code'
+
+  const params = useParams()
+  const { t } = useTranslation(params.lang as string)
 
   const codeJSON = JSON.stringify(avatarOption, null, 4)
   const highlightedCode = highlightJSON(codeJSON)
@@ -23,7 +28,9 @@ export const CodeModal = () => {
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[800px]">
         <DialogHeader>
-          <DialogTitle className="text-base font-bold">配置代码</DialogTitle>
+          <DialogTitle className="text-base font-bold">
+            {t('code-modal-title')}
+          </DialogTitle>
         </DialogHeader>
         <div className="relative h-[80vh] py-4 bg-[#1d2026] rounded-[0.8rem] mb-4">
           <ScrollArea className="h-full w-full">
@@ -38,7 +45,7 @@ export const CodeModal = () => {
             variant="secondary"
             className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2"
           >
-            复制代码
+            {t('copy-code')}
           </Button>
         </div>
       </DialogContent>

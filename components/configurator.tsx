@@ -9,9 +9,14 @@ import { useEffect, useState } from 'react'
 import { previewData } from '@/lib/dynamic-data'
 import Image from 'next/image'
 import { ColorWheel } from './color-wheel'
+import { useTranslation } from '@/i18n/client'
+import { useParams } from 'next/navigation'
 
 export const Configurator = () => {
   const { avatarOption, setAvatarOption } = useAvatarOption()
+  const params = useParams()
+  const { lang } = params
+  const { t } = useTranslation(lang as string)
 
   const [sections, setSections] = useState<
     {
@@ -141,13 +146,13 @@ export const Configurator = () => {
     <ScrollArea className="h-full w-full">
       <div>
         <div className="py-7 px-4">
-          <div className="mb-6 font-bold leading-6">{'头像形状'}</div>
+          <div className="mb-6 font-bold leading-6">{t('avatar-shape')}</div>
           <div>
             <ul className="list-none flex items-center">
               {SETTINGS.wrapperShape.map((shape) => (
                 <li
                   key={shape}
-                  title={shape}
+                  title={t(shape)}
                   className="py-[0.4rem] px-2"
                   onClick={() => switchWrapperShape(shape)}
                 >
@@ -167,7 +172,7 @@ export const Configurator = () => {
         </div>
 
         <div className="py-7 px-4">
-          <div className="mb-6 font-bold leading-6">{'边框颜色'}</div>
+          <div className="mb-6 font-bold leading-6">{t('border-color')}</div>
           <div>
             <ColorWheel
               colors={SETTINGS.borderColor}
@@ -178,7 +183,9 @@ export const Configurator = () => {
         </div>
 
         <div className="py-7 px-4">
-          <div className="mb-6 font-bold leading-6">{'背景颜色'}</div>
+          <div className="mb-6 font-bold leading-6">
+            {t('background-color')}
+          </div>
           <div>
             <ColorWheel
               colors={SETTINGS.backgroundColor}
@@ -190,7 +197,7 @@ export const Configurator = () => {
 
         {sections.map((s) => (
           <div className="py-7 px-4" key={s.widgetType}>
-            <div className="mb-6 font-bold leading-6">{s.widgetType}</div>
+            <div className="mb-6 font-bold leading-6">{t(s.widgetType)}</div>
             <div>
               {(s.widgetType === WidgetType.Tops ||
                 s.widgetType === WidgetType.Face ||
@@ -200,7 +207,7 @@ export const Configurator = () => {
                   open={s.widgetType === WidgetType.Face}
                 >
                   <summary className="text-[#677f98] text-[13px] cursor-pointer select-none">
-                    {'颜色'}
+                    {t('colors')}
                   </summary>
                   <ColorWheel
                     colors={

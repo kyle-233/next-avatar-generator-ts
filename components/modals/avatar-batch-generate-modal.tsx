@@ -14,6 +14,8 @@ import { Button } from '../ui/button'
 import { AvatarGenerator } from '../avatar-generator'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import { useParams } from 'next/navigation'
+import { useTranslation } from '@/i18n/client'
 
 export const AvatarBatchGenerateModal = () => {
   const { isOpen, onClose, type, data } = useModal()
@@ -21,6 +23,9 @@ export const AvatarBatchGenerateModal = () => {
 
   const [making, setMaking] = useState(false)
   const [madeCount, setMadeCount] = useState(0)
+
+  const params = useParams()
+  const { t } = useTranslation(params.lang as string)
 
   const { avatarList = [], generateMultiple } = data
 
@@ -85,7 +90,9 @@ export const AvatarBatchGenerateModal = () => {
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[960px]">
         <DialogHeader>
-          <DialogTitle className="text-base font-bold">批量生成</DialogTitle>
+          <DialogTitle className="text-base font-bold">
+            {t('generate-multiple')}
+          </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-y-4">
           <div className="flex items-center justify-between">
@@ -98,10 +105,10 @@ export const AvatarBatchGenerateModal = () => {
                   generateMultiple?.()
                 }}
               >
-                换一批
+                {t('regenerate')}
               </Button>
               <Button variant="secondary" onClick={make}>
-                下载全部
+                {t('download-multiple')}
               </Button>
             </div>
           </div>

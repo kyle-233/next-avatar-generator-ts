@@ -10,10 +10,14 @@ import { useAvatarOption } from '@/components/hooks/use-avatar-options'
 import { useState } from 'react'
 import { useModal } from '@/store/modal-store'
 import { AvatarOption } from '@/types'
+import { useParams } from 'next/navigation'
+import { useTranslation } from '@/i18n/client'
 
 export const AvatarActionGroup = () => {
   const { avatarOption, setAvatarOption } = useAvatarOption()
   const [downloading, setDownloading] = useState(false)
+  const params = useParams()
+  const { t } = useTranslation(params.lang as string)
   const { onOpen } = useModal()
 
   function handleGenerate() {
@@ -98,7 +102,7 @@ export const AvatarActionGroup = () => {
         className="font-bold"
         onClick={handleGenerate}
       >
-        随机生成
+        {t('randomize')}
       </Button>
       <Button
         variant="secondary"
@@ -106,7 +110,7 @@ export const AvatarActionGroup = () => {
         disabled={downloading}
         onClick={handleDownload}
       >
-        {downloading ? '正在下载' : '下载头像'}
+        {downloading ? t('downloading') : t('download')}
       </Button>
       <Button
         variant="secondary"
@@ -115,7 +119,7 @@ export const AvatarActionGroup = () => {
           generateMultiple(30)
         }}
       >
-        批量生成
+        {t('generate-multiple')}
       </Button>
     </div>
   )
