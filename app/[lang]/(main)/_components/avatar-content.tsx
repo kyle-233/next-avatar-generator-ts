@@ -1,5 +1,5 @@
 'use client'
-import { AvatarGenerator } from '@/components/avatar-generator'
+import { AvatarGenerator } from '@/components/avatar/avatar-generator'
 import { useAvatarOption } from '@/components/hooks/use-avatar-options'
 import { useCollapse } from '@/components/hooks/use-collapse'
 import { cn } from '@/lib/utils'

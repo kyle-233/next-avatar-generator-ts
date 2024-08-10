@@ -11,7 +11,7 @@ import { useCollapse } from '@/components/hooks/use-collapse'
 import { useModal } from '@/store/modal-store'
 import { useParams } from 'next/navigation'
 import { useTranslation } from '@/i18n/client'
-import { Icons } from './icons'
+import { Icons } from '../../../../components/icons'
 
 export const AvatarActionBar = () => {
   const { history, setState } = useStore()

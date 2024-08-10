@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { AvatarBackground } from './avatar-background'
 import { AvatarBorder } from './avatar-border'
-import { Avatar } from '../app/[lang]/(main)/_components/avatar'
+import { Avatar } from './avatar'
 import { AvatarOption } from '@/types'
 
 interface AvatarGeneratorProps {

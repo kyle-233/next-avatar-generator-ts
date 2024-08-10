@@ -2,8 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useState } from 'react'
-import { useCollapse } from './hooks/use-collapse'
+import { useCollapse } from '../../../../components/hooks/use-collapse'
 import { Configurator } from './configurator'
 
 export const Aside = () => {
@@ -19,7 +18,7 @@ export const Aside = () => {
         <Configurator />
       </div>
       <div
-        className="absolute top-2/4 left-0 w-5 hover:w-6 h-16 cursor-pointer flex items-center justify-center bg-[#1f2329] -translate-x-full -translate-y-1/2 transition-all rounded-l-md duration-200 group"
+        className="absolute top-2/4 left-0 w-5 hover:w-6 h-16 cursor-pointer flex items-center justify-center bg-content -translate-x-full -translate-y-1/2 transition-all rounded-l-md duration-200 group"
         onClick={() => {
           setIsCollapsed()
         }}

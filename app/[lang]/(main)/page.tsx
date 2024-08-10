@@ -1,7 +1,7 @@
 import { useTranslation } from '@/i18n'
-import { AvatarActionBar } from '@/components/avatar-action-bar'
+import { AvatarActionBar } from '@/app/[lang]/(main)/_components/avatar-action-bar'
 import { TRIGGER_PROBABILITY } from '@/lib/constant'
-import { AvatarActionGroup } from '@/components/avatar-action-group'
+import { AvatarActionGroup } from '@/app/[lang]/(main)/_components/avatar-action-group'
 import { AvatarContent } from './_components/avatar-content'
 
 export default async function Home({

@@ -1,11 +1,11 @@
 'use client'
-import { Aside } from '@/components/aside'
+import { Aside } from '@/app/[lang]/(main)/_components/aside'
 import { Header } from './header'
 import { Footer } from './footer'
 import { useCollapse } from '@/components/hooks/use-collapse'
 import { cn } from '@/lib/utils'
-import { BackgroundGradient } from '@/components/background-gradient'
 import { ConfettiCanvas } from '@/components/confetti-canvas'
+import { BackgroundGradient } from './_components/background-gradient'
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isCollapsed, setIsCollapsed } = useCollapse()
