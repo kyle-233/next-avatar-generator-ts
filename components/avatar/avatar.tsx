@@ -1,10 +1,9 @@
 'use client'
-import { useOrigin } from '@/components/hooks/use-origin'
 import { AVATAR_LAYER, NONE } from '@/lib/constant'
 import { widgetData } from '@/lib/dynamic-data'
 import { WidgetType } from '@/lib/enums'
 import { AvatarOption } from '@/types'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const Avatar = ({
   avatarOption,
@@ -13,21 +12,25 @@ export const Avatar = ({
   avatarOption: AvatarOption
   avatarSize: number
 }) => {
-  const [content, setContent] = useState('')
-  const origin = useOrigin()
+  const [content, setContent] = useState<React.ReactSVGElement | string>('')
   useEffect(() => {
     const getContent = async () => {
       const sortedList = Object.entries(avatarOption.widgets).sort(
         ([prevShape, prev], [nextShape, next]) => {
-          const ix = prev.zIndex ?? AVATAR_LAYER[prevShape]?.zIndex ?? 0
-          const iix = next.zIndex ?? AVATAR_LAYER[nextShape]?.zIndex ?? 0
+          const ix =
+            prev.zIndex ?? (AVATAR_LAYER as any)[prevShape]?.zIndex ?? 0
+          const iix =
+            next.zIndex ?? (AVATAR_LAYER as any)[nextShape]?.zIndex ?? 0
           return ix - iix
         },
       )
       const promises: Promise<string>[] = sortedList.map(
         async ([widgetType, opt]) => {
-          if (opt.shape !== NONE && widgetData?.[widgetType]?.[opt.shape]) {
-            return (await widgetData[widgetType][opt.shape]()).default
+          if (
+            opt.shape !== NONE &&
+            (widgetData as any)?.[widgetType]?.[opt.shape]
+          ) {
+            return (await (widgetData as any)[widgetType][opt.shape]()).default
           }
           return ''
         },
@@ -35,53 +38,81 @@ export const Avatar = ({
       let skinColor: string | undefined
       const svgRawListPromise = await Promise.all(promises).then(
         async (raw) => {
-          return await raw.map(async (svgRawObject, i) => {
-            const [widgetType, widget] = sortedList[i]
-            let widgetFillColor = widget.fillColor
+          return await raw.map(
+            async (svgRawFn: (() => Record<string, any>) | string, i) => {
+              const [widgetType, widget] = sortedList[i]
+              let widgetFillColor = widget.fillColor
 
-            if (widgetType === WidgetType.Face) {
-              skinColor = widgetFillColor
-            }
-            if (skinColor && widgetType === WidgetType.Ear) {
-              widgetFillColor = skinColor
-            }
+              if (widgetType === WidgetType.Face) {
+                skinColor = widgetFillColor
+              }
+              if (skinColor && widgetType === WidgetType.Ear) {
+                widgetFillColor = skinColor
+              }
 
-            if ((svgRawObject as any).src) {
-              const svgRawResponse = await fetch(
-                `${origin}/${(svgRawObject as any).src}`,
-              )
-              const svgRaw = await svgRawResponse.text()
+              if (svgRawFn) {
+                const svgRawChildren = (svgRawFn as any)?.()
+                React.Children.toArray(svgRawChildren.props.children)
 
-              const content = svgRaw
-                .slice(svgRaw.indexOf('>', svgRaw.indexOf('<svg')) + 1)
-                .replace('</svg>', '')
-                .replaceAll('$fillColor', widgetFillColor || 'transparent')
+                const getChildrenContent: (innerChildren: any) => any = (
+                  innerChildren: any,
+                ) => {
+                  if (!innerChildren) return ''
+                  return React.Children.map(
+                    innerChildren,
+                    (innerChild: any) => {
+                      const fill = innerChild?.props?.fill
+                      const props: Record<string, any> = {}
+                      if (fill === '$fillColor') {
+                        props.fill = widgetFillColor || 'transparent'
+                      }
+                      return React.cloneElement(
+                        innerChild,
+                        props,
+                        getChildrenContent(innerChild?.props?.children),
+                      )
+                    },
+                  )
+                }
 
-              return `
-                      <g id="vue-color-avatar-${sortedList[i][0]}">
-                        ${content}
-                      </g>
-                    `
-            }
-            return ''
-          })
+                const childrenContent = getChildrenContent(
+                  svgRawChildren.props.children,
+                )
+                const newSvg = React.createElement(
+                  'g',
+                  {
+                    id: `color-avatar-${sortedList[i][0]}`,
+                    key: `color-avatar-${sortedList[i][0]}`,
+                  },
+                  childrenContent,
+                )
+                return newSvg
+              }
+              return ''
+            },
+          )
         },
       )
       const svgRawList = await Promise.all(svgRawListPromise)
-      const svgContent = `
-        <svg
-            width="${avatarSize}"
-            height="${avatarSize}"
-            viewBox="0 0 ${avatarSize / 0.7} ${avatarSize / 0.7}"
-            preserveAspectRatio="xMidYMax meet"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <g transform="translate(100, 65)">
-                ${svgRawList.join('')}
-            </g>
-        </svg>
-        `
+      const gContent = React.createElement(
+        'g',
+        {
+          transform: 'translate(100, 65)',
+        },
+        svgRawList,
+      )
+      const svgContent = React.createElement(
+        'svg',
+        {
+          width: avatarSize,
+          height: avatarSize,
+          viewBox: `0 0 ${avatarSize / 0.7} ${avatarSize / 0.7}`,
+          preserveAspectRatio: 'xMidYMax meet',
+          fill: 'none',
+          xmlns: 'http://www.w3.org/2000/svg',
+        },
+        gContent,
+      )
       return svgContent
     }
     getContent().then((res) => {
@@ -89,10 +120,5 @@ export const Avatar = ({
     })
   }, [avatarSize, avatarOption.widgets])
 
-  return (
-    <div
-      className="relative z-2 w-full h-full"
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
-  )
+  return <div className="relative z-2 w-full h-full">{content}</div>
 }

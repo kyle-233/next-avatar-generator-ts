@@ -21,7 +21,6 @@ export const AvatarActionBar = () => {
   const { onOpen } = useModal()
   const canUndo = history.past.length > 0
   const canRedo = history.future.length > 0
-  console.log('', Icons.back)
   const menus = [
     {
       type: ActionType.Undo,

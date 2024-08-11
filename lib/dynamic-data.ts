@@ -12,7 +12,6 @@ import {
   TopsShape,
   WidgetType,
 } from './enums'
-import { fetchSvg } from './utils'
 
 /** @internal */
 type Data = Readonly<{

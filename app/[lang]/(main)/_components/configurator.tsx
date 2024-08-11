@@ -1,14 +1,13 @@
 'use client'
 import { AVATAR_LAYER, SETTINGS } from '@/lib/constant'
-import { ScrollArea } from '../../../../components/ui/scroll-area'
-import { cn, fetchSvg } from '@/lib/utils'
-import { useAvatarOption } from '../../../../components/hooks/use-avatar-options'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { cn } from '@/lib/utils'
+import { useAvatarOption } from '@/components/hooks/use-avatar-options'
 import { BeardShape, WidgetShape, WidgetType, WrapperShape } from '@/lib/enums'
-import { useMounted } from '../../../../components/hooks/use-mounted'
-import { useEffect, useState } from 'react'
+import { useMounted } from '@/components/hooks/use-mounted'
+import React, { useEffect, useState } from 'react'
 import { previewData } from '@/lib/dynamic-data'
-import Image from 'next/image'
-import { ColorWheel } from '../../../../components/color/color-wheel'
+import { ColorWheel } from '@/components/color/color-wheel'
 import { useTranslation } from '@/i18n/client'
 import { useParams } from 'next/navigation'
 
@@ -24,7 +23,7 @@ export const Configurator = () => {
       widgetList: {
         widgetType: WidgetType
         widgetShape: WidgetShape
-        svgRaw: string
+        svgRaw: string | React.FunctionComponentElement<any>
       }[]
     }[]
   >([])
@@ -54,17 +53,24 @@ export const Configurator = () => {
     const list = SETTINGS[`${widgetType}Shape`]
     const promises: Promise<string>[] = list.map(async (widget: string) => {
       if (widget !== 'none' && previewData?.[widgetType]?.[widget]) {
-        const response: any = await fetchSvg(widgetType, widget)
-        return response
+        return (
+          await (() => import(`@/assets/preview/${widgetType}/${widget}.svg`))()
+        ).default
       }
       return 'X'
     })
     const svgRawList = await Promise.all(promises).then((raw) => {
-      return raw.map((svgRaw, i) => {
+      return raw.map((SvgRaw: any, i) => {
+        const svgRaw = SvgRaw !== 'X' && SvgRaw?.()
         return {
           widgetType,
           widgetShape: list[i],
-          svgRaw,
+          svgRaw:
+            SvgRaw === 'X'
+              ? 'X'
+              : React.cloneElement(<SvgRaw />, {
+                  viewBox: `0 0 ${svgRaw?.props?.width} ${svgRaw?.props?.height}`,
+                }),
         }
       })
     })
@@ -236,17 +242,19 @@ export const Configurator = () => {
                       onClick={() => switchWidget(s.widgetType, it.widgetShape)}
                       // dangerouslySetInnerHTML={{ __html: it.svgRaw }}
                     >
-                      <div className="relative w-full h-full grid place-content-center">
-                        {it.svgRaw === 'X' ? (
+                      {
+                        it.svgRaw === 'X' ? (
                           'X'
                         ) : (
-                          <Image
-                            fill
-                            src={it.svgRaw}
-                            alt={`${it.widgetType} ${it.widgetShape}`}
-                          />
-                        )}
-                      </div>
+                          // <Image
+                          //   fill
+                          //   src={it.svgRaw}
+                          //   alt={`${it.widgetType} ${it.widgetShape}`}
+                          // />
+                          <>{it.svgRaw}</>
+                        )
+                        // 1
+                      }
                     </li>
                   )
                 })}
