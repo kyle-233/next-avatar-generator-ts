@@ -6,7 +6,6 @@ import { useCollapse } from '@/components/hooks/use-collapse'
 import { Configurator } from './_components/configurator'
 
 export default function AsidePage() {
-  console.log('1234567890')
   const { isCollapsed, setIsCollapsed } = useCollapse()
   return (
     <div

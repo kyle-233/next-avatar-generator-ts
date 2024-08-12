@@ -28,7 +28,6 @@ export default function RootLayout({
     lang: string
   }
 }>) {
-  console.log('props', props)
   return (
     <html lang={lang} dir={dir(lang)} suppressHydrationWarning>
       <body className={cn('text-common', font.className)}>

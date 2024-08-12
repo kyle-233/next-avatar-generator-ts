@@ -1,19 +1,11 @@
 'use client'
 
-import { LanguageSwitcher } from '@/components/language-switch'
+import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
-import { useTranslation } from '@/i18n/client'
-import { languages } from '@/i18n/settings'
-import { Github } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import { Trans } from 'react-i18next'
 
 export const Header = () => {
-  const params = useParams()
-  const { lang } = params
-  const { t } = useTranslation(lang as string, 'footer')
   return (
     <header className="py-4 px-8 flex items-center justify-between">
       <Link className="flex items-center" href={'/'}>
@@ -27,10 +19,19 @@ export const Header = () => {
           Color Avatar
         </span>
       </Link>
-      <Button variant="ghost">
-        <Github className="w-6 h-6 mr-2" />
+      {/* <Button variant="ghost">
+        <Icons.github className="w-6 h-6 mr-2" />
         <span className="text-lg font-bold">GitHub</span>
-      </Button>
+      </Button> */}
+      <Link
+        href={''}
+        target="_blank"
+        rel="noreferrer"
+        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <Icons.github className="w-6 h-6" aria-hidden="true" />
+        <span className="sr-only">Github</span>
+      </Link>
     </header>
   )
 }

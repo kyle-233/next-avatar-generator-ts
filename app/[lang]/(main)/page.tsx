@@ -1,7 +1,6 @@
-import { useTranslation } from '@/i18n'
-import { AvatarActionBar } from '@/app/[lang]/(main)/_components/avatar-action-bar'
-import { TRIGGER_PROBABILITY } from '@/lib/constant'
-import { AvatarActionGroup } from '@/app/[lang]/(main)/_components/avatar-action-group'
+import React from 'react'
+import { AvatarActionBar } from './_components/avatar-action-bar'
+import { AvatarActionGroup } from './_components/avatar-action-group'
 import { AvatarContent } from './_components/avatar-content'
 
 export default async function Home({
@@ -9,8 +8,6 @@ export default async function Home({
 }: {
   params: { lang: string }
 }) {
-  const { t } = await useTranslation(lang)
-
   return (
     <div className="flex h-full flex-col justify-center items-center py-8">
       <AvatarContent />
