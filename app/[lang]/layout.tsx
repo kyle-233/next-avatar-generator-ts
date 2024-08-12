@@ -21,12 +21,14 @@ export async function generateStaticParams() {
 export default function RootLayout({
   children,
   params: { lang },
+  ...props
 }: Readonly<{
   children: React.ReactNode
   params: {
     lang: string
   }
 }>) {
+  console.log('props', props)
   return (
     <html lang={lang} dir={dir(lang)} suppressHydrationWarning>
       <body className={cn('text-common', font.className)}>

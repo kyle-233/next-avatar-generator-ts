@@ -1,5 +1,4 @@
 'use client'
-import { Aside } from '@/app/[lang]/(main)/_components/aside'
 import { Header } from './header'
 import { Footer } from './footer'
 import { useCollapse } from '@/components/hooks/use-collapse'
@@ -7,7 +6,12 @@ import { cn } from '@/lib/utils'
 import { ConfettiCanvas } from '@/components/confetti-canvas'
 import { BackgroundGradient } from './_components/background-gradient'
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+interface MainLayoutProps
+  extends React.PropsWithChildren<{
+    aside: React.ReactNode
+  }> {}
+
+const MainLayout = ({ children, aside }: MainLayoutProps) => {
   const { isCollapsed, setIsCollapsed } = useCollapse()
   return (
     <main className="h-full w-full flex overflow-hidden">
@@ -27,7 +31,8 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           <ConfettiCanvas />
         </div>
       </section>
-      <Aside />
+      {/* <Aside /> */}
+      {aside}
     </main>
   )
 }

@@ -2,10 +2,11 @@
 
 import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useCollapse } from '../../../../components/hooks/use-collapse'
-import { Configurator } from './configurator'
+import { useCollapse } from '@/components/hooks/use-collapse'
+import { Configurator } from './_components/configurator'
 
-export const Aside = () => {
+export default function AsidePage() {
+  console.log('1234567890')
   const { isCollapsed, setIsCollapsed } = useCollapse()
   return (
     <div
@@ -33,3 +34,5 @@ export const Aside = () => {
     </div>
   )
 }
+
+// export default AsidePage

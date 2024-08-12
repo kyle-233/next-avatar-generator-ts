@@ -19,9 +19,11 @@ export function middleware(req: any) {
   if (!lng) lng = fallbackLng
 
   // Redirect if lng in path is not supported
+
   if (
     !languages.some((loc) => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
-    !req.nextUrl.pathname.startsWith('/_next')
+    !req.nextUrl.pathname.startsWith('/_next') &&
+    !req.nextUrl.pathname.startsWith('/test')
   ) {
     return NextResponse.redirect(
       new URL(`/${lng}${req.nextUrl.pathname}`, req.url),

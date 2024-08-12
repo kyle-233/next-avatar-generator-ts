@@ -26,6 +26,14 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - [Next.js Internationalization](https://nextjs.org/docs/app/building-your-application/routing/internationalization)
 - [五分钟掌握Next.js国际化方案](https://juejin.cn/post/7388818047753109558#heading-0)
 
+## Avatar
+
+-[kenney](https://kenney.nl/assets/category:2D?sort=update)
+
+## Thanks
+
+-[Color Avatar](https://vue-color-avatar.leoku.dev/)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
