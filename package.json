@@ -20,6 +20,7 @@
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "feed": "^4.2.2",
     "html2canvas": "^1.4.1",
     "i18next": "^23.12.2",
     "i18next-browser-languagedetector": "^8.0.0",

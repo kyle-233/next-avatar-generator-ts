@@ -1,7 +1,6 @@
 'use client'
 
 import { Icons } from '@/components/icons'
-import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -9,20 +8,11 @@ export const Header = () => {
   return (
     <header className="py-4 px-8 flex items-center justify-between">
       <Link className="flex items-center" href={'/'}>
-        <Image
-          src={'/_next/mascot.svg'}
-          alt="Color Avatar Logo"
-          width={40}
-          height={40}
-        />
+        <Icons.logo className="w-10 h-10" />
         <span className="ml-4 text-2xl font-bold tracking-wide">
           Color Avatar
         </span>
       </Link>
-      {/* <Button variant="ghost">
-        <Icons.github className="w-6 h-6 mr-2" />
-        <span className="text-lg font-bold">GitHub</span>
-      </Button> */}
       <Link
         href={''}
         target="_blank"
