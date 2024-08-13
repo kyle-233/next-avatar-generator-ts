@@ -1,5 +1,4 @@
 import { getRandomAvatarOption } from '@/lib'
-import { SCREEN } from '@/lib/constant'
 import { ActionType, WrapperShape } from '@/lib/enums'
 import type { AvatarOption } from '@/types'
 import { create } from 'zustand'

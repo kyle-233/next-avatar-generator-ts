@@ -26,17 +26,17 @@ export const CodeModal = () => {
   const highlightedCode = highlightJSON(codeJSON)
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[800px]">
+      <DialogContent className="w-[86vw] md:w-full max-w-[800px] rounded-md">
         <DialogHeader>
           <DialogTitle className="text-base font-bold">
             {t('code-modal-title')}
           </DialogTitle>
         </DialogHeader>
-        <div className="relative h-[80vh] py-4 bg-[#1d2026] rounded-[0.8rem] mb-4">
+        <div className="relative w-full h-[80vh] py-4 bg-[#1d2026] rounded-[0.8rem] mb-4">
           <ScrollArea className="h-full w-full">
             <pre>
               <code
-                className="block px-[1.5rem] text-[#81cfef] text-[1.25rem] font-mono leading-[1.4]"
+                className="block px-[1.5rem] text-[#81cfef] text-sm md:text-[1.25rem] font-mono leading-[1.4]"
                 dangerouslySetInnerHTML={{ __html: highlightedCode }}
               ></code>
             </pre>

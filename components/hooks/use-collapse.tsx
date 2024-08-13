@@ -1,8 +1,7 @@
-import { SCREEN } from '@/lib/constant'
 import { create } from 'zustand'
 
 interface CollapseProps {
-  isCollapsed: boolean
+  isCollapsed: boolean | null
   setIsCollapsed: () => void
   flipped: boolean
   onFlipped: () => void
