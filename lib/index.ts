@@ -43,6 +43,7 @@ export function getRandomAvatarOption(
   presetOption: Partial<AvatarOption> = {},
   useOption: Partial<AvatarOption> = {},
 ): AvatarOption {
+  console.time('generate-avatar')
   const gender = getRandomValue(SETTINGS.gender)
 
   const beardList: BeardShape[] = []
@@ -142,7 +143,7 @@ export function getRandomAvatarOption(
       },
     },
   }
-
+  console.timeEnd('generate-avatar')
   return avatarOption
 }
 

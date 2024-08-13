@@ -8,7 +8,7 @@ const links = {
 
 export const siteConfig = {
   title: 'Avatar - A Web of generating avatar',
-  name: 'overreacted',
+  name: 'Avatar',
   description: 'A Web of generating avatar',
   url: '',
   links,

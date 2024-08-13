@@ -12,15 +12,15 @@ const font = Nunito({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: siteConfig.title,
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ['nextjs', 'react', 'react server components', 'blog'],
+  keywords: ['nextjs', 'react', 'react server components', 'avatar generate'],
   authors: [
     {
       name: 'kyle',
-      url: '',
+      url: 'https://github.com/kyle-233',
     },
   ],
   creator: 'kyle',
@@ -57,7 +57,6 @@ export async function generateStaticParams() {
 export default function RootLayout({
   children,
   params: { lang },
-  ...props
 }: Readonly<{
   children: React.ReactNode
   params: {

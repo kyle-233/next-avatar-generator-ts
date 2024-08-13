@@ -212,7 +212,7 @@ export const Configurator = () => {
                   className="my-4 mx-2"
                   open={s.widgetType === WidgetType.Face}
                 >
-                  <summary className="text-[#677f98] text-[13px] cursor-pointer select-none">
+                  <summary className="text-[13px] cursor-pointer select-none">
                     {t('colors')}
                   </summary>
                   <ColorWheel

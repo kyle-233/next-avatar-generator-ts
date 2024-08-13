@@ -3,17 +3,6 @@ import { AvatarActionBar } from './_components/avatar-action-bar'
 import { AvatarActionGroup } from './_components/avatar-action-group'
 import { AvatarContent } from './_components/avatar-content'
 
-export const metadata = {
-  title: 'overreacted — A blog by Dan Abramov',
-  description: 'A personal blog by Dan Abramov',
-  alternates: {
-    types: {
-      'application/atom+xml': 'https://overreacted.io/atom.xml',
-      'application/rss+xml': 'https://overreacted.io/rss.xml',
-    },
-  },
-}
-
 export default async function Home({
   params: { lang },
 }: {

@@ -9,9 +9,10 @@ export const Header = () => {
     <header className="py-4 px-8 flex items-center justify-between">
       <Link className="flex items-center" href={'/'}>
         <Icons.logo className="w-10 h-10" />
-        <span className="ml-4 text-2xl font-bold tracking-wide">
+        <span className="hidden md:inline ml-4 text-2xl font-bold tracking-wide">
           Color Avatar
         </span>
+        <span className="sr-only">Color Avatar</span>
       </Link>
       <Link
         href={''}

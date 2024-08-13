@@ -114,7 +114,7 @@ export const AvatarActionGroup = () => {
       </Button>
       <Button
         variant="secondary"
-        className="font-bold"
+        className="font-bold hidden md:block"
         onClick={() => {
           generateMultiple(30)
         }}

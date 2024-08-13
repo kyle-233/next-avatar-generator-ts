@@ -4,6 +4,7 @@ import { widgetData } from '@/lib/dynamic-data'
 import { WidgetType } from '@/lib/enums'
 import { AvatarOption } from '@/types'
 import React, { useEffect, useState } from 'react'
+import { Skeleton } from '../ui/skeleton'
 
 export const Avatar = ({
   avatarOption,
@@ -13,8 +14,10 @@ export const Avatar = ({
   avatarSize: number
 }) => {
   const [content, setContent] = useState<React.ReactSVGElement | string>('')
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     const getContent = async () => {
+      console.time('import-file')
       const sortedList = Object.entries(avatarOption.widgets).sort(
         ([prevShape, prev], [nextShape, next]) => {
           const ix =
@@ -113,12 +116,23 @@ export const Avatar = ({
         },
         gContent,
       )
+      console.timeEnd('import-file')
       return svgContent
     }
+    setLoading(true)
+    console.time('async')
+    console.time('start')
     getContent().then((res) => {
       setContent(res)
+      console.timeEnd('async')
+      setLoading(false)
     })
+    console.timeEnd('start')
   }, [avatarSize, avatarOption.widgets])
 
-  return <div className="relative z-2 w-full h-full">{content}</div>
+  return (
+    <div className="relative z-2 w-full h-full">
+      {loading ? <Skeleton className="w-full h-full" /> : content}
+    </div>
+  )
 }

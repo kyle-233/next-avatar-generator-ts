@@ -14,7 +14,7 @@ export default function AsidePage() {
         isCollapsed && ' translate-x-full',
       )}
     >
-      <div className="h-full w-80">
+      <div className="h-full w-80 bg-content-foreground md:bg-transparent">
         <Configurator />
       </div>
       <div

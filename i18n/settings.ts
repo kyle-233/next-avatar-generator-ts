@@ -1,6 +1,3 @@
-import { Icons } from '@/components/icons'
-import React from 'react'
-
 export const fallbackLng = 'zh-CN'
 export const cookieName = 'acccept-language'
 export const defaultNS = 'translation'
@@ -10,7 +7,6 @@ export const languagesConfig: Record<
 > = {
   'zh-CN': { lang: 'zh-CN', name: '简体中文', node: 'ChinaFlag' },
   en: { lang: 'en', name: 'English', node: 'USAFlag' },
-  // de: { lang: 'de', imageSrc: '/_next/DEU.svg' },
 }
 export const languages = Object.keys(languagesConfig)
 

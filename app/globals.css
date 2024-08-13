@@ -5,10 +5,12 @@
 html,
 body,
 :root {
-  @apply h-full;
+  @apply min-h-screen;
+  @apply h-screen;
   @apply box-border;
   @apply text-base;
   @apply scroll-smooth;
+  @apply select-none;
 }
 
 @layer base {

@@ -12,13 +12,13 @@ interface MainLayoutProps
   }> {}
 
 const MainLayout = ({ children, aside }: MainLayoutProps) => {
-  const { isCollapsed, setIsCollapsed } = useCollapse()
+  const { isCollapsed } = useCollapse()
   return (
     <main className="h-full w-full flex overflow-hidden">
       <section
         className={cn(
           'flex-1 h-full transition-all duration-200',
-          isCollapsed ? 'w-full' : 'pr-80',
+          isCollapsed ? 'w-full' : 'w-full md:pr-80',
         )}
       >
         <div className="h-full scale-100">
