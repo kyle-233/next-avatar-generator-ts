@@ -5,11 +5,12 @@ import { cn } from '@/lib/utils'
 import { useAvatarOption } from '@/components/hooks/use-avatar-options'
 import { BeardShape, WidgetShape, WidgetType, WrapperShape } from '@/lib/enums'
 import { useMounted } from '@/components/hooks/use-mounted'
-import React, { useEffect, useState } from 'react'
+import React, { ComponentType, useEffect, useState } from 'react'
 import { previewData } from '@/lib/dynamic-data'
 import { ColorWheel } from '@/components/color/color-wheel'
 import { useTranslation } from '@/i18n/client'
 import { useParams } from 'next/navigation'
+import dynamic, { LoaderComponent } from 'next/dynamic'
 
 export const Configurator = () => {
   const { avatarOption, setAvatarOption } = useAvatarOption()
@@ -23,7 +24,7 @@ export const Configurator = () => {
       widgetList: {
         widgetType: WidgetType
         widgetShape: WidgetShape
-        svgRaw: string | React.FunctionComponentElement<any>
+        svgRaw: string | React.ComponentType<any>
       }[]
     }[]
   >([])
@@ -51,26 +52,32 @@ export const Configurator = () => {
 
   async function getWidgets(widgetType: WidgetType) {
     const list = SETTINGS[`${widgetType}Shape`]
-    const promises: Promise<string>[] = list.map(async (widget: string) => {
-      if (widget !== 'none' && previewData?.[widgetType]?.[widget]) {
-        return (
-          await (() => import(`@/assets/preview/${widgetType}/${widget}.svg`))()
-        ).default
-      }
-      return 'X'
-    })
+    const promises: Promise<ComponentType | string>[] = list.map(
+      async (widget: string) => {
+        if (widget !== 'none' && previewData?.[widgetType]?.[widget]) {
+          // return (
+          //   await (() => import(`@/assets/preview/${widgetType}/${widget}.svg`))()
+          // ).default
+          return dynamic(
+            previewData?.[widgetType]?.[widget] as () => LoaderComponent<{}>,
+          )
+        }
+        return 'X'
+      },
+    )
     const svgRawList = await Promise.all(promises).then((raw) => {
-      return raw.map((SvgRaw: any, i) => {
-        const svgRaw = SvgRaw !== 'X' && SvgRaw?.()
+      return raw.map((SvgRaw, i) => {
+        // const svgRaw = SvgRaw !== 'X' && SvgRaw?.()
         return {
           widgetType,
           widgetShape: list[i],
           svgRaw:
             SvgRaw === 'X'
               ? 'X'
-              : React.cloneElement(<SvgRaw />, {
-                  viewBox: `0 0 ${svgRaw?.props?.width} ${svgRaw?.props?.height}`,
-                }),
+              : // : React.cloneElement(<SvgRaw />, {
+                //     viewBox: `0 0 ${svgRaw?.props?.width} ${svgRaw?.props?.height}`,
+                //   }),
+                SvgRaw,
         }
       })
     })
@@ -230,6 +237,7 @@ export const Configurator = () => {
               )}
               <ul className="list-none grid grid-cols-4 gap-2">
                 {s.widgetList.map((it) => {
+                  const Svg = it.svgRaw
                   return (
                     <li
                       key={it.widgetShape}
@@ -251,8 +259,10 @@ export const Configurator = () => {
                           //   src={it.svgRaw}
                           //   alt={`${it.widgetType} ${it.widgetShape}`}
                           // />
-                          <>{it.svgRaw}</>
+                          // <>{it.svgRaw}</>
+                          <Svg />
                         )
+                        // { Svg }
                         // 1
                       }
                     </li>

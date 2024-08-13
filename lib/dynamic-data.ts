@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import {
   BeardShape,
   ClothesShape,
@@ -17,6 +18,12 @@ import {
 type Data = Readonly<{
   [key in `${WidgetType}`]: {
     [key in string]: () => Promise<any> | void
+  }
+}>
+
+type PreviewData = Readonly<{
+  [key in `${WidgetType}`]: {
+    [key in string]: React.ComponentType<{}>
   }
 }>
 
@@ -100,75 +107,79 @@ const widgetData: Data = {
 
 const previewData: Data = {
   [WidgetType.Face]: {
-    [FaceShape.Base]: () => {},
+    [FaceShape.Base]: () => import('@/assets/preview/face/base.svg'),
   },
 
   [WidgetType.Ear]: {
-    [EarShape.Attached]: () => {},
-    [EarShape.Detached]: () => {},
+    [EarShape.Attached]: () => import('@/assets/preview/ear/attached.svg'),
+    [EarShape.Detached]: () => import('@/assets/preview/ear/detached.svg'),
   },
 
   [WidgetType.Eyes]: {
-    [EyesShape.Ellipse]: () => {},
-    [EyesShape.Eyeshadow]: () => {},
-    [EyesShape.Round]: () => {},
-    [EyesShape.Smiling]: () => {},
+    [EyesShape.Ellipse]: () => import('@/assets/preview/eyes/ellipse.svg'),
+    [EyesShape.Eyeshadow]: () => import('@/assets/preview/eyes/eyeshadow.svg'),
+    [EyesShape.Round]: () => import('@/assets/preview/eyes/round.svg'),
+    [EyesShape.Smiling]: () => import('@/assets/preview/eyes/smiling.svg'),
   },
 
   [WidgetType.Beard]: {
-    [BeardShape.Scruff]: () => {},
+    [BeardShape.Scruff]: () => import('@/assets/preview/beard/scruff.svg'),
   },
 
   [WidgetType.Clothes]: {
-    [ClothesShape.Collared]: () => {},
-    [ClothesShape.Crew]: () => {},
-    [ClothesShape.Open]: () => {},
+    [ClothesShape.Collared]: () =>
+      import('@/assets/preview/clothes/collared.svg'),
+    [ClothesShape.Crew]: () => import('@/assets/preview/clothes/crew.svg'),
+    [ClothesShape.Open]: () => import('@/assets/preview/clothes/open.svg'),
   },
 
   [WidgetType.Earrings]: {
-    [EarringsShape.Hoop]: () => {},
-    [EarringsShape.Stud]: () => {},
+    [EarringsShape.Hoop]: () => import('@/assets/preview/earrings/hoop.svg'),
+    [EarringsShape.Stud]: () => import('@/assets/preview/earrings/stud.svg'),
   },
 
   [WidgetType.Eyebrows]: {
-    [EyebrowsShape.Down]: () => {},
-    [EyebrowsShape.Eyelashesdown]: () => {},
-    [EyebrowsShape.Eyelashesup]: () => {},
-    [EyebrowsShape.Up]: () => {},
+    [EyebrowsShape.Down]: () => import('@/assets/preview/eyebrows/down.svg'),
+    [EyebrowsShape.Eyelashesdown]: () =>
+      import('@/assets/preview/eyebrows/eyelashesdown.svg'),
+    [EyebrowsShape.Eyelashesup]: () =>
+      import('@/assets/preview/eyebrows/eyelashesup.svg'),
+    [EyebrowsShape.Up]: () => import('@/assets/preview/eyebrows/up.svg'),
   },
 
   [WidgetType.Glasses]: {
-    [GlassesShape.Round]: () => {},
-    [GlassesShape.Square]: () => {},
+    [GlassesShape.Round]: () => import('@/assets/preview/glasses/round.svg'),
+    [GlassesShape.Square]: () => import('@/assets/preview/glasses/square.svg'),
   },
 
   [WidgetType.Mouth]: {
-    [MouthShape.Frown]: () => {},
-    [MouthShape.Laughing]: () => {},
-    [MouthShape.Nervous]: () => {},
-    [MouthShape.Pucker]: () => {},
-    [MouthShape.Sad]: () => {},
-    [MouthShape.Smile]: () => {},
-    [MouthShape.Smirk]: () => {},
-    [MouthShape.Surprised]: () => {},
+    [MouthShape.Frown]: () => import('@/assets/preview/mouth/frown.svg'),
+    [MouthShape.Laughing]: () => import('@/assets/preview/mouth/laughing.svg'),
+    [MouthShape.Nervous]: () => import('@/assets/preview/mouth/nervous.svg'),
+    [MouthShape.Pucker]: () => import('@/assets/preview/mouth/pucker.svg'),
+    [MouthShape.Sad]: () => import('@/assets/preview/mouth/sad.svg'),
+    [MouthShape.Smile]: () => import('@/assets/preview/mouth/smile.svg'),
+    [MouthShape.Smirk]: () => import('@/assets/preview/mouth/smirk.svg'),
+    [MouthShape.Surprised]: () =>
+      import('@/assets/preview/mouth/surprised.svg'),
   },
 
   [WidgetType.Nose]: {
-    [NoseShape.Curve]: () => {},
-    [NoseShape.Pointed]: () => {},
-    [NoseShape.Round]: () => {},
+    [NoseShape.Curve]: () => import('@/assets/preview/nose/curve.svg'),
+    [NoseShape.Pointed]: () => import('@/assets/preview/nose/pointed.svg'),
+    [NoseShape.Round]: () => import('@/assets/preview/nose/round.svg'),
   },
 
   [WidgetType.Tops]: {
-    [TopsShape.Beanie]: () => {},
-    [TopsShape.Clean]: () => {},
-    [TopsShape.Danny]: () => {},
-    [TopsShape.Fonze]: () => {},
-    [TopsShape.Funny]: () => {},
-    [TopsShape.Pixie]: () => {},
-    [TopsShape.Punk]: () => {},
-    [TopsShape.Turban]: () => {},
-    [TopsShape.Wave]: () => {},
+    [TopsShape.Beanie]: () => import('@/assets/preview/tops/beanie.svg'),
+    [TopsShape.Clean]: () => import('@/assets/preview/tops/clean.svg'),
+    [TopsShape.Danny]: () => import('@/assets/preview/tops/danny.svg'),
+    [TopsShape.Fonze]: () => import('@/assets/preview/tops/fonze.svg'),
+    [TopsShape.Funny]: () => import('@/assets/preview/tops/funny.svg'),
+    [TopsShape.Pixie]: () => import('@/assets/preview/tops/pixie.svg'),
+    [TopsShape.Punk]: () => import('@/assets/preview/tops/punk.svg'),
+    [TopsShape.Turban]: () => import('@/assets/preview/tops/turban.svg'),
+    [TopsShape.Wave]: () => import('@/assets/preview/tops/wave.svg'),
   },
 }
 
