@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "commitlint": "commitlint --edit --config .commitlintrc.json -e -V",
-    "prepare": "husky"
+    "prepare": "husky",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
@@ -41,12 +42,14 @@
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
+    "@next/bundle-analyzer": "^14.2.5",
     "@svgr/webpack": "^8.1.0",
     "@types/canvas-confetti": "^1.6.4",
     "@types/node": "^20",
     "@types/object-hash": "^3.0.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",

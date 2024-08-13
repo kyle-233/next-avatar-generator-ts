@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
+import NextBundleAnalyzer from '@next/bundle-analyzer'
 const nextConfig = {
+    experimental: {
+        optimizePackageImports: ['icon-library'],
+    },
     webpack(config) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) =>
@@ -29,4 +33,8 @@ const nextConfig = {
     }
 }
 
-export default nextConfig;
+const withBundleAnalyzer = NextBundleAnalyzer({
+    enabled: process.env.ANALYZE === 'true',
+})
+
+export default withBundleAnalyzer(nextConfig);
