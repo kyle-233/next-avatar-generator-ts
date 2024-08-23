@@ -10,6 +10,7 @@ export const config = {
     '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|site.webmanifest).*)',
   ],
 }
+const publicFile = /\.(.*)|\/favicon.ico|\/*\/.$/
 
 export function middleware(req: any) {
   let lng
@@ -17,6 +18,11 @@ export function middleware(req: any) {
     lng = acceptLanguage.get(req.cookies.get(cookieName).value)
   if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'))
   if (!lng) lng = fallbackLng
+
+  // public文件不重定向
+  if (publicFile.test(req.nextUrl.pathname)) {
+    return
+  }
 
   // Redirect if lng in path is not supported
 

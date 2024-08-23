@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ['nextjs', 'react', 'react server components', 'avatar generate'],
+  keywords: ['avatar random generate', 'random', 'avatar', 'generate'],
   authors: [
     {
       name: 'kyle',

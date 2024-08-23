@@ -1,5 +1,5 @@
 import { generateFeed } from '@/lib/feed'
-import { metadata } from '../layout'
+import { metadata } from '../[lang]/layout'
 
 export async function GET() {
   const feed = generateFeed(metadata)

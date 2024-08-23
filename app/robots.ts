@@ -6,10 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: [
-      'https://avatar.overreacted.top/atom.xml',
-      'https://avatar.overreacted.top/rss.xml',
-      'https://avatar.overreacted.top/sitemap.xml',
-    ],
+    sitemap: ['https://avatar.overreacted.top/sitemap.xml'],
   }
 }
