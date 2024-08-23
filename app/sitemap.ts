@@ -1,16 +1,16 @@
 import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const links = [
     {
-      url: 'https://avatar.overreacted.top',
+      url: 'https://next-avatar-generator-ts.vercel.app',
       lastModified: new Date(),
-      alternates: {
-        languages: {
-          es: 'https://avatar.overreacted.top/es',
-          'zh-CN': 'https://avatar.overreacted.top/zh-CN',
-        },
-      },
+      //   alternates: {
+      //     languages: {
+      //       es: 'https://next-avatar-generator-ts.vercel.app/es',
+      //       'zh-CN': 'https://next-avatar-generator-ts.vercel.app/zh-CN',
+      //     },
+      //   },
     },
   ]
   return links

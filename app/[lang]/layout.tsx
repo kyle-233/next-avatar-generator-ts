@@ -35,8 +35,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     types: {
-      'application/atom+xml': 'https://avatar.overreacted.top/atom.xml',
-      'application/rss+xml': 'https://avatar.overreacted.top/rss.xml',
+      'application/atom+xml':
+        'https://next-avatar-generator-ts.vercel.app/atom.xml',
+      'application/rss+xml':
+        'https://next-avatar-generator-ts.vercel.app/rss.xml',
     },
   },
   // twitter: {

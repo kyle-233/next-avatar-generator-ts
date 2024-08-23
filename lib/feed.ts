@@ -2,7 +2,7 @@ import { Feed, type FeedOptions } from 'feed'
 import type { Metadata } from 'next'
 
 export function generateFeed(metadata: Metadata) {
-  const site_url = 'https://avatar.overreacted.top/'
+  const site_url = 'https://next-avatar-generator-ts.vercel.app/'
 
   const feedOptions: FeedOptions = {
     author: {
