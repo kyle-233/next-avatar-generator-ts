@@ -7,6 +7,7 @@ import { languages } from '@/i18n/settings'
 import { cn } from '@/lib/utils'
 import { ModalProvider } from '@/components/providers/modal-provider'
 import { siteConfig } from '@/config/site'
+import { Analytics } from '@/components/analytics'
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -74,6 +75,7 @@ export default function RootLayout({
         >
           {children}
           <ModalProvider />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
